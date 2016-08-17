@@ -358,22 +358,11 @@ module Capybara
         raise ArgumentError
       end
 
+      driver.switch_to_frame(frame)
       begin
-        driver.switch_to_frame(frame)
-        begin
-          yield
-        ensure
-          driver.switch_to_frame(:parent)
-        end
-      rescue Capybara::NotSupportedByDriverError
-        # Support older driver frame API for now
-        if driver.respond_to?(:within_frame)
-          driver.within_frame(frame) do
-            yield
-          end
-        else
-          raise
-        end
+        yield
+      ensure
+        driver.switch_to_frame(:parent)
       end
     ensure
       scopes.pop
