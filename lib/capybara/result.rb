@@ -26,7 +26,7 @@ module Capybara
     def initialize(elements, query)
       @elements = elements
       @result_cache = []
-      @results_enum = lazy_select_elements { |node| query.matches_filters?(node) }
+      @results_enum = @elements.lazy.select { |node| query.matches_filters?(node) }
       @query = query
       # JRuby has an issue with eagerly finding next in lazy enumerators which
       # causes a concurrency issue with network requests here
@@ -135,18 +135,6 @@ module Capybara
 
     def rest
       @rest ||= @elements - full_results
-    end
-
-    def lazy_select_elements(&block)
-      if @elements.respond_to? :lazy  #Ruby 2.0+
-        @elements.lazy.select(&block)
-      else
-        Enumerator.new do |yielder|
-          @elements.each do |val|
-            yielder.yield(val) if block.call(val)
-          end
-        end
-      end
     end
   end
 end

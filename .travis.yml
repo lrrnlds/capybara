@@ -35,11 +35,6 @@ matrix:
           packages:
             - google-chrome-stable
             - awesome
-    - gemfile: gemfiles/Gemfile.ruby-19
-      rvm: 1.9.3
-    - gemfile: gemfiles/Gemfile.base-versions
-      rvm: 1.9.3
-    - gemfile: Gemfile
       rvm: 2.3.1
       env:
         - WINDOW_TEST=true
