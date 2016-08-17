@@ -354,18 +354,6 @@ module Capybara
       end
     end
 
-    # @deprecated Use default_max_wait_time instead
-    def default_wait_time
-      deprecate('default_wait_time', 'default_max_wait_time', true)
-      default_max_wait_time
-    end
-
-    # @deprecated Use default_max_wait_time= instead
-    def default_wait_time=(t)
-      deprecate('default_wait_time=', 'default_max_wait_time=')
-      self.default_max_wait_time = t
-    end
-
     def app_host=(url)
       raise ArgumentError.new("Capybara.app_host should be set to a url (http://www.example.com)") unless url.nil? || (url =~ URI::Parser.new.make_regexp)
       @app_host = url
