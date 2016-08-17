@@ -28,7 +28,6 @@ module Capybara
     attr_reader :reuse_server
     attr_accessor :raise_server_errors, :server_errors
     attr_writer :default_driver, :current_driver, :javascript_driver, :session_name, :server_host
-    attr_reader :save_and_open_page_path
     attr_accessor :app
 
     ##
@@ -383,12 +382,6 @@ module Capybara
     def default_wait_time=(t)
       deprecate('default_wait_time=', 'default_max_wait_time=')
       self.default_max_wait_time = t
-    end
-
-    def save_and_open_page_path=(path)
-      warn "DEPRECATED: #save_and_open_page_path is deprecated, please use #save_path instead. \n"\
-           "Note: Behavior is slightly different with relative paths - see documentation" unless path.nil?
-      @save_and_open_page_path = path
     end
 
     def app_host=(url)
