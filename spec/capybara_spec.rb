@@ -37,11 +37,10 @@ RSpec.describe Capybara do
   describe '.register_server' do
     before do
       Capybara.reuse_server = false
-      @old_server = Capybara.server
     end
 
     after do
-      Capybara.server(&@old_server)
+      Capybara.server = :default
       Capybara.reuse_server = true
     end
 
@@ -60,12 +59,8 @@ RSpec.describe Capybara do
   end
 
   describe ".server" do
-    before do
-      @old_server = Capybara.server
-    end
-
     after do
-      Capybara.server(&@old_server)
+      Capybara.server = :default
     end
 
     it "should default to a proc that calls run_default_server" do
@@ -76,8 +71,15 @@ RSpec.describe Capybara do
 
     it "should return a custom server proc" do
       server = lambda {|app, port|}
-      Capybara.server(&server)
+      Capybara.register_server :custom, &server
+      Capybara.server = :custom
       expect(Capybara.server).to eq(server)
+    end
+
+    it "should raise if passed a block" do
+      expect {
+        Capybara.server { |app, port, host| }
+      }.to raise_error ArgumentError
     end
   end
 

@@ -98,7 +98,6 @@ module Capybara
     # @yieldparam [<Rack>] app                The rack application that this server will contain.
     # @yieldparam port                        The port number the server should listen on
     # @yieldparam host                        The host/ip to bind to
-    # @yieldreturn [Capybara::Driver::Base]   A Capybara driver instance
     #
     def register_server(name, &block)
       servers[name.to_sym] = block
@@ -163,24 +162,11 @@ module Capybara
 
     ##
     #
-    # Register a proc that Capybara will call to run the Rack application.
+    #  Access the server block being used by the current session
     #
-    #     Capybara.server do |app, port, host|
-    #       require 'rack/handler/mongrel'
-    #       Rack::Handler::Mongrel.run(app, :Port => port)
-    #     end
-    #
-    # By default, Capybara will try to run webrick.
-    #
-    # @yield [app, port, host]      This block receives a rack app, port, and host/ip and should run a Rack handler
-    #
-    def server(&block)
-      if block_given?
-        warn "DEPRECATED: Passing a block to Capybara::server is deprecated, please use Capybara::register_server instead"
-        @server = block
-      else
-        @server
-      end
+    def server
+      raise ::ArgumentError, "Passing a block to Capybara::server is no longer supported. Use Capybara::register_server instead" if block_given?
+      @server
     end
 
     ##
@@ -193,11 +179,7 @@ module Capybara
     # @see register_server
     #
     def server=(name)
-      @server = if name.respond_to? :call
-        name
-      else
-        servers[name.to_sym]
-      end
+      @server = servers[name.to_sym]
     end
 
     ##
