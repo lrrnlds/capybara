@@ -14,7 +14,7 @@ module Capybara
       # @raise [Capybara::ExpectationNotMet] if the assertion hasn't succeeded during wait time
       # @return [true]
       #
-      def assert_title(title, options = {})
+      def assert_title(title, **options)
         _verify_title(title,options) { |query| raise Capybara::ExpectationNotMet, query.failure_message unless query.resolves_for?(self) }
       end
 
@@ -25,7 +25,7 @@ module Capybara
       # @raise [Capybara::ExpectationNotMet] if the assertion hasn't succeeded during wait time
       # @return [true]
       #
-      def assert_no_title(title, options = {})
+      def assert_no_title(title, **options)
         _verify_title(title,options) { |query| raise Capybara::ExpectationNotMet, query.negative_failure_message if query.resolves_for?(self) }
       end
 
@@ -35,7 +35,7 @@ module Capybara
       # @macro title_query_params
       # @return [Boolean]
       #
-      def has_title?(title, options = {})
+      def has_title?(title, **options)
         assert_title(title, options)
       rescue Capybara::ExpectationNotMet
         return false
@@ -47,7 +47,7 @@ module Capybara
       # @macro title_query_params
       # @return [Boolean]
       #
-      def has_no_title?(title, options = {})
+      def has_no_title?(title, **options)
         assert_no_title(title, options)
       rescue Capybara::ExpectationNotMet
         return false

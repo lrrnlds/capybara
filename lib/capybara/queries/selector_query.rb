@@ -7,8 +7,8 @@ module Capybara
       VALID_KEYS = COUNT_KEYS + [:text, :id, :class, :visible, :exact, :match, :wait, :filter_set]
       VALID_MATCH = [:first, :smart, :prefer_exact, :one]
 
-      def initialize(*args, &filter_block)
-        @options = if args.last.is_a?(Hash) then args.pop.dup else {} end
+      def initialize(*args, **options, &filter_block)
+        @options = options.dup
         @filter_block = filter_block
 
         if args[0].is_a?(Symbol)
@@ -25,6 +25,7 @@ module Capybara
 
         warn "Unused parameters passed to #{self.class.name} : #{args.to_s}" unless args.empty?
 
+        # TODO: make this better somehow
         # for compatibility with Capybara 2.0
         if Capybara.exact_options and @selector == Selector.all[:option]
           @options[:exact] = true

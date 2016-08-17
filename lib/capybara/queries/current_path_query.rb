@@ -5,7 +5,7 @@ module Capybara
   # @api private
   module Queries
     class CurrentPathQuery < BaseQuery
-      def initialize(expected_path, options = {})
+      def initialize(expected_path, **options)
         @expected_path = expected_path
         @options = {
           url: false,

@@ -12,9 +12,8 @@ module Capybara
         instance_eval(&block)
       end
 
-      def filter(name, *types_and_options, &block)
-        options = types_and_options.last.is_a?(Hash) ? types_and_options.pop.dup : {}
-        types_and_options.each { |k| options[k] = true}
+      def filter(name, *types, **options, &block)
+        types.each { |k| options[k] = true}
         filters[name] = Filter.new(name, block, options)
       end
 
@@ -22,7 +21,7 @@ module Capybara
         descriptions.push block
       end
 
-      def description(options={})
+      def description(**options)
         @descriptions.map {|desc| desc.call(options).to_s }.join
       end
 

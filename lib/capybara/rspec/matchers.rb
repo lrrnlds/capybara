@@ -192,19 +192,19 @@ module Capybara
     ::RSpec::Matchers.define_negated_matcher :not_match_selector, :match_selector if defined?(::RSpec::Matchers)
 
 
-    def have_xpath(xpath, options={}, &optional_filter_block)
+    def have_xpath(xpath, **options, &optional_filter_block)
       HaveSelector.new(:xpath, xpath, options, &optional_filter_block)
     end
 
-    def match_xpath(xpath, options={}, &optional_filter_block)
+    def match_xpath(xpath, **options, &optional_filter_block)
       MatchSelector.new(:xpath, xpath, options, &optional_filter_block)
     end
 
-    def have_css(css, options={}, &optional_filter_block)
+    def have_css(css, **options, &optional_filter_block)
       HaveSelector.new(:css, css, options, &optional_filter_block)
     end
 
-    def match_css(css, options={}, &optional_filter_block)
+    def match_css(css, **options, &optional_filter_block)
       MatchSelector.new(:css, css, options, &optional_filter_block)
     end
 
@@ -213,46 +213,39 @@ module Capybara
     end
     alias_method :have_content, :have_text
 
-    def have_title(title, options = {})
+    def have_title(title, **options)
       HaveTitle.new(title, options)
     end
 
-    def have_current_path(path, options = {})
+    def have_current_path(path, **options)
       HaveCurrentPath.new(path, options)
     end
 
-    def have_link(locator=nil, options={}, &optional_filter_block)
-      locator, options = nil, locator if locator.is_a? Hash
+    def have_link(locator, **options, &optional_filter_block)
       HaveSelector.new(:link, locator, options, &optional_filter_block)
     end
 
-    def have_button(locator=nil, options={}, &optional_filter_block)
-      locator, options = nil, locator if locator.is_a? Hash
+    def have_button(locator, **options, &optional_filter_block)
       HaveSelector.new(:button, locator, options, &optional_filter_block)
     end
 
-    def have_field(locator=nil, options={}, &optional_filter_block)
-      locator, options = nil, locator if locator.is_a? Hash
+    def have_field(locator, **options, &optional_filter_block)
       HaveSelector.new(:field, locator, options, &optional_filter_block)
     end
 
-    def have_checked_field(locator=nil, options={}, &optional_filter_block)
-      locator, options = nil, locator if locator.is_a? Hash
+    def have_checked_field(locator=nil, **options, &optional_filter_block)
       HaveSelector.new(:field, locator, options.merge(checked: true), &optional_filter_block)
     end
 
-    def have_unchecked_field(locator=nil, options={}, &optional_filter_block)
-      locator, options = nil, locator if locator.is_a? Hash
+    def have_unchecked_field(locator=nil, **options, &optional_filter_block)
       HaveSelector.new(:field, locator, options.merge(unchecked: true), &optional_filter_block)
     end
 
-    def have_select(locator=nil, options={}, &optional_filter_block)
-      locator, options = nil, locator if locator.is_a? Hash
+    def have_select(locator, **options, &optional_filter_block)
       HaveSelector.new(:select, locator, options, &optional_filter_block)
     end
 
-    def have_table(locator=nil, options={}, &optional_filter_block)
-      locator, options = nil, locator if locator.is_a? Hash
+    def have_table(locator, **options, &optional_filter_block)
       HaveSelector.new(:table, locator, options, &optional_filter_block)
     end
 
@@ -262,7 +255,7 @@ module Capybara
     #   expect(window).to become_closed(wait: 0.8)
     # @param options [Hash] optional param
     # @option options [Numeric] :wait (Capybara.default_max_wait_time) Maximum wait time
-    def become_closed(options = {})
+    def become_closed(**options)
       BecomeClosed.new(options)
     end
   end

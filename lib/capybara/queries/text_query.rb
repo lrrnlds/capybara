@@ -3,10 +3,11 @@ module Capybara
   # @api private
   module Queries
     class TextQuery < BaseQuery
-      def initialize(*args)
-        @type = (args.first.is_a?(Symbol) || args.first.nil?) ? args.shift : nil
+      def initialize(type=nil, expected_text, **options)
+        @type = type
         @type = (Capybara.ignore_hidden_elements or Capybara.visible_text_only) ? :visible : :all if @type.nil?
-        @expected_text, @options = args
+        @expected_text = expected_text
+        @options = options
         unless @expected_text.is_a?(Regexp)
           @expected_text = Capybara::Helpers.normalize_whitespace(@expected_text)
         end
