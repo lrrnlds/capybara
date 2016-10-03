@@ -213,15 +213,15 @@ module Capybara
       HaveCurrentPath.new(path, options)
     end
 
-    def have_link(locator, **options, &optional_filter_block)
+    def have_link(locator=nil, **options, &optional_filter_block)
       HaveSelector.new(:link, locator, options, &optional_filter_block)
     end
 
-    def have_button(locator, **options, &optional_filter_block)
+    def have_button(locator=nil, **options, &optional_filter_block)
       HaveSelector.new(:button, locator, options, &optional_filter_block)
     end
 
-    def have_field(locator, **options, &optional_filter_block)
+    def have_field(locator=nil, **options, &optional_filter_block)
       HaveSelector.new(:field, locator, options, &optional_filter_block)
     end
 
@@ -233,11 +233,11 @@ module Capybara
       HaveSelector.new(:field, locator, options.merge(unchecked: true), &optional_filter_block)
     end
 
-    def have_select(locator, **options, &optional_filter_block)
+    def have_select(locator=nil, **options, &optional_filter_block)
       HaveSelector.new(:select, locator, options, &optional_filter_block)
     end
 
-    def have_table(locator, **options, &optional_filter_block)
+    def have_table(locator=nil, **options, &optional_filter_block)
       HaveSelector.new(:table, locator, options, &optional_filter_block)
     end
 
