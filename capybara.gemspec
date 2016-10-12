@@ -35,7 +35,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("fuubar", [">= 1.0.0"])
   s.add_development_dependency("cucumber", [">= 2.3.0"])
   s.add_development_dependency("rake")
-  s.add_development_dependency("byebug")
   s.add_development_dependency("erubis")  # dependency specification needed by rbx
 
   if RUBY_ENGINE == 'rbx' then
