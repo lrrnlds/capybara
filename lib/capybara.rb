@@ -24,7 +24,7 @@ module Capybara
     attr_accessor :asset_host, :run_server, :always_include_port
     attr_accessor :server_port, :exact, :match, :exact_options, :visible_text_only, :enable_aria_label
     attr_accessor :default_selector, :default_max_wait_time, :ignore_hidden_elements
-    attr_accessor :save_path, :wait_on_first_by_default, :automatic_label_click, :automatic_reload
+    attr_accessor :save_path, :automatic_label_click, :automatic_reload
     attr_reader :reuse_server
     attr_accessor :raise_server_errors, :server_errors
     attr_writer :default_driver, :current_driver, :javascript_driver, :session_name, :server_host
@@ -52,7 +52,6 @@ module Capybara
     # [ignore_hidden_elements = Boolean]  Whether to ignore hidden elements on the page (Default: true)
     # [automatic_reload = Boolean]        Whether to automatically reload elements as Capybara is waiting (Default: true)
     # [save_path = String]  Where to put pages saved through save_(page|screenshot), save_and_open_(page|screenshot) (Default: Dir.pwd)
-    # [wait_on_first_by_default = Boolean]   Whether Node#first defaults to Capybara waiting behavior for at least 1 element to match (Default: false)
     # [automatic_label_click = Boolean]   Whether Node#choose, Node#check, Node#uncheck will attempt to click the associated label element if the checkbox/radio button are non-visible (Default: false)
     # [enable_aria_label = Boolean]  Whether fields, links, and buttons will match against aria-label attribute (Default: false)
     # [reuse_server = Boolean]  Reuse the server thread between multiple sessions using the same app object (Default: true)
@@ -460,7 +459,6 @@ Capybara.configure do |config|
   config.raise_server_errors = true
   config.server_errors = [StandardError]
   config.visible_text_only = false
-  config.wait_on_first_by_default = false
   config.automatic_label_click = false
   config.enable_aria_label = false
   config.reuse_server = true

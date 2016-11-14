@@ -28,7 +28,6 @@ module Capybara
         Capybara.raise_server_errors = true
         Capybara.visible_text_only = false
         Capybara.match = :smart
-        Capybara.wait_on_first_by_default = false
         Capybara.enable_aria_label = false
       end
 

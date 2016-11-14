@@ -1,6 +1,12 @@
 # Version 3.0.0
 Release date: unreleased
 
+### Added
+* Ruby 2.2+ required
+* RSpec 2.x no longer supported
+* Deprecated methods removed
+* `first` now raises ElementNotFound by default instead of returning nil, when no matches are found  - Issue #1507
+
 #Edge
 Release date: unreleased
 
