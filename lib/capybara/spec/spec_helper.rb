@@ -42,12 +42,12 @@ module Capybara
         end
       end
 
-      def spec(name, options={}, &block)
+      def spec(name, **options, &block)
         @specs ||= []
         @specs << [name, options, block]
       end
 
-      def run_specs(session, name, options={})
+      def run_specs(session, name, **options)
         specs = @specs
         RSpec.describe Capybara::Session, name, options do
           include Capybara::SpecHelper
